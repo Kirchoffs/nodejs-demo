@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      input {
+        border: 1px solid CornflowerBlue;
+        border-radius: 5px;
+        padding: 5px;
+      }
+
+      button {
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px 5px 10px;
+        background-color: blue;
+        color: white;
+      }
+
+      .container {
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #messages {
+        text-align: left;
+        padding-top: 10px;
+        padding-bottom: 50px;
+        padding-left: 30%;
+        padding-right: 30%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <input type="text" id="input" class="form-control" placeholder="Your message..." />
+      <button onclick="message(document.getElementById('input').value)" class="btn btn-primary">Send</button>
+    </div>
+    <div id="messages"></div>
+    <script>
+      function poll() {
+        fetch("/poll")
+          .then(res => res.text())
+          .then(message => {
+            const newMessage = document.createElement("div");
+            newMessage.innerHTML = message;
+            document.getElementById("messages").appendChild(newMessage);
+          })
+          .finally(() => poll());
+      }
+
+      function message(message) {
+        fetch("/message", {
+          method: "POST",
+          body: message,
+        });
+      }
+      
+      poll();
+    </script>
+  </body>
+</html>
