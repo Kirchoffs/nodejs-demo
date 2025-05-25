@@ -1,0 +1,24 @@
+{
+  "name": "mcp-server",
+  "version": "1.0.0",
+  "main": "sse_stdio_server.ts",
+  "scripts": {
+    "start": "ts-node sse_stdio_server.ts",
+    "sse": "ts-node sse_stdio_server.ts",
+    "streamable": "ts-node streamable_server.ts",
+    "test": "node test/stdio_client.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.2",
+    "express": "^5.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
