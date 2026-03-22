@@ -24,7 +24,10 @@ function createPipelineBuilder() {
               }
               
               finished = true;
-              cb && cb(err, res);
+              
+              if (cb) {
+                cb(err, res);
+              }
             }
 
             const dispatch = (index) => {

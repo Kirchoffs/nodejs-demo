@@ -19,7 +19,7 @@ const pipeline = createPipelineBuilder()
     console.log('Middleware 3 received request:', req);
     console.log('Trace ID:', ctx.traceId);
     req.third_step = true;
-    next();
+    next(null, 'Request is fully processed');
   })
   .build();
 
